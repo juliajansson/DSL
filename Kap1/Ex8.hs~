@@ -1,0 +1,7 @@
+module Ex8 where
+
+data ComplexSyn r = ToCartesian r r
+                  | ComplexSyn r :+: ComplexSyn r
+                  | ComplexSyn r :*: ComplexSyn r
+
+simp:: ComplexSyn r -> ComplexSyn r

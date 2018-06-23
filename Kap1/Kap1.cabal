@@ -1,0 +1,30 @@
+-- The name of the package.
+name:                Kap1
+version:             0.1.0.0
+synopsis:            Trying out DSLsofMath chapter one exercises
+license:             BSD3
+author:              Julia Jansson
+maintainer:          julia.jansson@gmail.com
+category:            Math
+build-type:          Simple
+
+-- extra-source-files:  
+
+-- Constraint on the version of Cabal needed to build this package.
+cabal-version:       >=1.10
+
+library
+  -- Modules exported by the library.
+  exposed-modules:     Ex1, Ex2, Ex3, Ex4, Ex8,
+                       AnteckningarKap1
+  
+  -- Other library packages from which modules are imported.
+  build-depends:       base >=4.8 && <4.11, QuickCheck
+  -- later perhaps: DSLsofMath
+    
+  -- Directories containing source files.
+  -- hs-source-dirs:      
+  
+  -- Base language which the package is written in.
+  default-language:    Haskell2010
+  
