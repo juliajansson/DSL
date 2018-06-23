@@ -1,0 +1,18 @@
+Kap 1
+---------------------------------
+    1	.
+    2	.
+    3	.
+    4	.
+    5	later - analouge to 3 and 4
+    6	later
+    7	later
+    8	?
+    9	transform
+    10	transform
+    11
+    12
+    13
+    14	embed eval
+Kap 2
+----------------------------------
