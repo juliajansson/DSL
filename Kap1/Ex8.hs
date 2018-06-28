@@ -34,6 +34,10 @@ simpStep (ToCartesian 0 0 :+: w) = w
 simpStep (w :+: ToCartesian 0 0) = w
 simpStep (ToCartesian 0 0 :*: w) = 0
 simpStep (w :*: ToCartesian 0 0) = 0
+simpStep (w :*: ToCartesian 1 0) = 1
+simpStep (ToCartesian 1 0 :*: w) = 1
+simpStep (w :+: z) = simpStep w :+: simpStep z
+simpStep (w :*: z) = simpStep w :*: simpStep z 
 simpStep w = w
 
 test0:: ComplexSyn Integer
@@ -41,4 +45,10 @@ test0 = 0 + 1
 
 test1 = 0*test0
 
+i = ToCartesian 0 1
+
+test2::ComplexSyn Integer
+test2 = (i + 1)*1
+
+--Blir fel - behöver CSem
 
