@@ -7,8 +7,8 @@ Kap 1
     5	later - analouge to 3 and 4
     6	later
     7	later
-    8	?
-    9	transform
+    8	fel - fråga
+    9	. med facit, resolve
     10	transform
     11
     12
