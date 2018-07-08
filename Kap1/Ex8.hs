@@ -3,6 +3,7 @@ module Ex8 where
 
 data ComplexSyn r = ToCartesian r r
                   | ComplexSyn r :+: ComplexSyn r
+                  | ComplexSyn r :-: ComplexSyn r
                   | ComplexSyn r :*: ComplexSyn r
                   deriving (Eq, Show)
 
@@ -19,6 +20,7 @@ evalCSyn (l :*: r) = evalCSyn l *. evalCSyn r
 instance Num a => Num (ComplexSyn a) where
    (+) = (:+:)
    (*) = (:*:)
+   (-) = (:-:)
    fromInteger = fromIntegerCS
 
 fromIntegerCS:: Num r => Integer -> ComplexSyn r
@@ -30,6 +32,7 @@ simp expr | expr == expr' = expr
      where expr' = simpStep expr
 
 simpStep:: (Num r, Eq r) => ComplexSyn r -> ComplexSyn r
+simpStep (ToCartesian a b :+: ToCartesian c d) = ToCartesian (a+c) (b+d)
 simpStep (ToCartesian 0 0 :+: w) = w
 simpStep (w :+: ToCartesian 0 0) = w
 simpStep (ToCartesian 0 0 :*: w) = 0
@@ -37,7 +40,8 @@ simpStep (w :*: ToCartesian 0 0) = 0
 simpStep (w :*: ToCartesian 1 0) = 1
 simpStep (ToCartesian 1 0 :*: w) = 1
 simpStep (w :+: z) = simpStep w :+: simpStep z
-simpStep (w :*: z) = simpStep w :*: simpStep z 
+simpStep (w :*: (z :+: v)) = (simpStep (w :*: z)) :+: (simpStep (w :*: v))
+simpStep (w :*: z) = simpStep w :*: simpStep z
 simpStep w = w
 
 test0:: ComplexSyn Integer
@@ -48,7 +52,4 @@ test1 = 0*test0
 i = ToCartesian 0 1
 
 test2::ComplexSyn Integer
-test2 = (i + 1)*1
-
---Blir fel - behöver CSem
-
+test2 = (i + 1)*(i + 1)
