@@ -1,0 +1,6 @@
+isoR:: (Bool -> t) -> (t, t)
+isoR f | f True == a = (a, a)
+       | f False == b = (b, b)  
+
+isoL:: (t, t) -> (Bool -> t)
+

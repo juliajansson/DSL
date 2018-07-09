@@ -1,3 +1,4 @@
+module Ex12 where
 --They have the same cardinality, n^2 = n*n
 
 isoR:: (Bool -> t) -> (t, t)
