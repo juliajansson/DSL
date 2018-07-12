@@ -65,12 +65,47 @@ F | T | T      | T      | T
 F | F | F      | F      | T
 -}
 
---TODO: Vad har facit att göra med truth tables? Hur blir exa och exb bevis?
-
---TODO: förstå facit på c
+--Lagen om det uteslutna tredje
 {-
-exc:: forall p. Or p (Not p)
-exc = notElim . nnopnp
-    where nnopnp:: Not (Not (Or p (Not p)))
-          nnopnp = notIntro . (\
+exc:: Or p (Not p)
+exc = notElim x
+     where x:: Not (Not (Or p (Not p)))
+           x = notIntro f
+           f:: Not (Or p (Not p)) -> And q (Not q)
+           f y = orElim 
+           --q = Or p (Not p)
+-}
+
+--andIntro gives a circular proof
+
+--First, theory exploration
+theory1:: (p -> p') -> (q -> q') -> (And p q -> And p' q')
+theory1 ptp qtq apq = andIntro (ptp p) (qtq q)
+    where p = andElimL apq
+          q = andElimR apq
+
+theory2:: (p -> p') -> (q -> q') -> (Or p q -> Or p' q')
+theory2 ptp qtq opq = orElim opq fp fq
+      where fp = orIntroL . ptp
+            fq = orIntroR . qtq
+
+--Some examples from the book
+
+example0:: And p q -> And q p
+example0 apq = andIntro (andElimR apq) (andElimL apq)
+
+example1:: And q (Not q) -> q
+--Min första tanke:
+example1 aqnq = andElimL aqnq
+
+example1':: And q (Not q) -> q
+--Från boken:
+example1' aqnq = notElim (notIntro (\hyp -> aqnq))
+--TODO: Vad betyder hyp? hyp verkar vara av typ Not q
+
+
+{-
+theory3:: (q -> p) -> (Not p -> Not q)
+theory3 q p np = notIntro pred
+      where pred:: q -> And a (Not a)
 -}
