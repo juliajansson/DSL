@@ -103,9 +103,5 @@ example1':: And q (Not q) -> q
 example1' aqnq = notElim (notIntro (\hyp -> aqnq))
 --TODO: Vad betyder hyp? hyp verkar vara av typ Not q
 
-
-{-
-theory3:: (q -> p) -> (Not p -> Not q)
-theory3 q p np = notIntro pred
-      where pred:: q -> And a (Not a)
--}
+--TODO: Theory 3 - går inte ihop sig alls
+--theory3:: (q -> p) -> (Not p -> Not q)
