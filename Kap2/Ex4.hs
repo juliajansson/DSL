@@ -20,7 +20,7 @@ implElim f = f
 
 type Or p q = Either p q
 
---How to do or stuff?
+--How to do or stuff? either function - pattern matching
 
 --orElim:: Or p q -> (p -> r) -> (q -> r) -> r
 
