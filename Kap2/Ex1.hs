@@ -100,21 +100,15 @@ theory2 ptp qtq opq = orElim opq fp fq
 example0:: And p q -> And q p
 example0 apq = andIntro (andElimR apq) (andElimL apq)
 
-example1:: And q (Not q) -> q
---Min första tanke:
-example1 aqnq = andElimL aqnq
-
-example1':: And q (Not q) -> q
+example1:: And q (Not q) -> p
 --Från boken:
-example1' aqnq = notElim (notIntro (\hyp -> aqnq))
---TODO: Vad betyder hyp? hyp verkar vara av typ Not q
+example1 aqnq = notElim (notIntro (\hyp -> aqnq))
 
---TODO: Theory 3 - går inte ihop sig alls
+--TODO: Theory 3 - varför felmeddelande?
 
 {-
 theory3:: (q -> p) -> (Not p -> Not q)
-theory3 q p = notIntro . paqnqf
-      where paqnqf:: Not p -> (p -> And q (Not q))
-            paqnqf np = paqnq
-            paqnq:: p -> And q (Not q)
+theory3 f np = notIntro qapnp
+    where qapnp:: q -> And p (Not p)
+          qapnp q = andIntro (f q) np
 -}
