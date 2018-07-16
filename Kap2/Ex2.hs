@@ -97,30 +97,31 @@ notor2andnot = implIntro func
            func notorpq = andIntro (notMap orIntroL notorpq)  --np
                                    (notMap orIntroR notorpq)  --nq
 
+no2an:: NotOr p q -> AndNot p q
+no2an = implElim notor2andnot
 
 
 -----------------------------------------------------
 
---TODO: notand -> ornot
+--Help functions:
 
+mapAnd:: (p -> p') -> (q -> q') -> (And p q -> And p' q')
+mapAnd ptp qtq apq = andIntro (ptp p) (qtq q)
+    where p = andElimL apq
+          q = andElimR apq
 
-
-
-
-
-
-
-
-
-{-
+andnotElim:: And (Not (Not p)) (Not (Not q)) -> And p q
+andnotElim = mapAnd notElim notElim
 
 
 notand2ornot:: Impl (NotAnd p q) (OrNot p q)
-notand2ornot = implIntro 
+notand2ornot = implIntro (notElim . notMap (andnotElim . no2an))
 
--}
+na2on:: NotAnd p q -> OrNot p q
+na2on = notElim . notMap (andnotElim . no2an)
 
+--TODO: förstå typer på hjälpfunktioner
+--exand:: NotAnd p q -> 
+exand = notMap (andnotElim . no2an)
 
-             
-             
 
