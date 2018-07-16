@@ -45,17 +45,34 @@ type AndNot p q = And (Not p) (Not q)
 type NotAnd p q = Not (And p q)
 type OrNot p q = Or (Not p) (Not q)
 
+--Help functions:
+--Från Ex1.hs: theory3
+notMap:: (q -> p) -> (Not p -> Not q)
+notMap q2p np = notIntro (\q -> andIntro (q2p q) np)
+
+--From the solution - alike orIntroL and orIntroR
+notp2notand:: Not p -> NotAnd p q
+notp2notand = notMap andElimL
+
+notq2notand:: Not q -> NotAnd p q
+notq2notand = notMap andElimR
+
 --TODO: Förstå facit
 
 {-
-deMorgan1L:: Impl (NotOr p q) (AndNot p q)
-deMorgan1L p q = implIntro notor andnot
-     where notor = 
-           andnot =
-
-deMorgan1R:: Impl (AndNot p q) (NotOr p q)
-
-deMorgan2L:: Impl (NotAnd p q) (OrNot p q)
-
-deMorgan2R:: Impl (OrNot p q) (NotAnd p q)
+notor2andnot:: Impl (NotOr p q) (AndNot p q)
 -}
+
+{-
+andnot2notor:: Impl (AndNot p q) (NotOr p q)
+
+notand2ornot:: Impl (NotAnd p q) (OrNot p q)
+-}
+
+ornot2notand:: Impl (OrNot p q) (NotAnd p q)
+ornot2notand = implIntro func
+       where func:: OrNot p q -> NotAnd p q
+             func onpnq = orElim onpnq notp2notand notq2notand
+             
+             
+

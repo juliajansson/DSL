@@ -104,11 +104,7 @@ example1:: And q (Not q) -> p
 --Från boken:
 example1 aqnq = notElim (notIntro (\hyp -> aqnq))
 
---TODO: Theory 3 - varför felmeddelande?
 
-{-
 theory3:: (q -> p) -> (Not p -> Not q)
-theory3 f np = notIntro qapnp
-    where qapnp:: q -> And p (Not p)
-          qapnp q = andIntro (f q) np
--}
+theory3 q2p np = notIntro (\q -> andIntro (q2p q) np)
+
