@@ -16,12 +16,12 @@ Kap 1
     14  .        
 Kap 2
 ----------------------------------
-    1   progress med facit - resolve 
-    2   resolve
-    3
-    4   resolve
-    5
-    6
+    1   .
+    2   . - resolve
+    3   ????
+    4   progress but questions
+    5   questions
+    6   ????
     7
     8
     9
