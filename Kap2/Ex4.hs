@@ -36,6 +36,9 @@ func:: (Either (p, q) r -> (Either p r, Either q r),
        (Either p r, Either q r) -> Either (p, q) r)
 func = (f, g)
 
+
+--Får massa felmeddelanden - varför?
+
 f:: Either (p, q) r -> (Either p r, Either q r)
 f Left a = (Left (fst a), Left (snd a))
 f Right r = (Right r, Right r)
