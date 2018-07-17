@@ -18,8 +18,6 @@ notIntro f x = y
 contraHey:: Empty -> p
 contraHey evE = case evE of {}
 
---TODO: Prove this
-{-
 ex1:: (q, q -> Empty) -> p
-ex1 = 
--}
+ex1 (a,b) = contraHey (b a) 
+

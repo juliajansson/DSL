@@ -34,8 +34,8 @@ orIntroR q = Right q
 
 func:: (Either (p, q) r -> (Either p r, Either q r),
        (Either p r, Either q r) -> Either (p, q) r)
-func'::And (Or (And p q) r -> And (Or p r) (Or q r))
-           (And (Or p r) (Or q r) -> Or (And p q) r)
+func'::And (Impl (Or (And p q) r) (And (Or p r) (Or q r)))
+           (Impl (And (Or p r) (Or q r)) (Or (And p q) r))
 func = (f, g)
 func' = func
 
@@ -50,6 +50,16 @@ g (Left p, Right r) = Right r
 g (Right r, Left q) = Right r
 g (Right r, Right r') = Right r
 
---TODO: nr 2
+----------------------------------------------------------------
 
---And (Impl (Or (And p q) r) (And (Or p r) (Or q r))) (Impl (And (Or p r) (Or q r)) (Or (And p q) r))
+next:: ((Either p q, r) -> Either (p, r) (q, r),
+        Either (p, r) (q, r) -> (Either p q, r))
+next = (h, i)
+
+h:: (Either p q, r) -> Either (p, r) (q, r)
+h (Left p, r) = Left (p, r)
+h (Right q, r) = Right (q,r)
+
+i:: Either (p, r) (q, r) -> (Either p q, r)
+i (Left (p, r)) = (Left p, r)
+i (Right (q, r)) = (Right q, r)
