@@ -20,12 +20,29 @@ implElim f = f
 
 type Or p q = Either p q
 
---How to do or stuff? either function - pattern matching
-
---orElim:: Or p q -> (p -> r) -> (q -> r) -> r
+orElim:: Or p q -> (p -> r) -> (q -> r) -> r
+orElim (Left p) f g = f p
+orElim (Right q) f g = g q
 
 orIntroL:: p -> Or p q
 orIntroL p = Left p
 
 orIntroR:: q -> Or p q
 orIntroR q = Right q
+
+------------------------------------------------
+
+func:: (Either (p, q) r -> (Either p r, Either q r),
+       (Either p r, Either q r) -> Either (p, q) r)
+func = (f, g)
+
+f:: Either (p, q) r -> (Either p r, Either q r)
+f Left a = (Left (fst a), Left (snd a))
+f Right r = (Right r, Right r)
+
+g:: (Either p r, Either q r) -> Either (p, q) r
+g (Left p, Left q) = Left (p, q)
+g (Left p, Right r) = Right r 
+g (Right r, Left q) = Right r 
+
+--And (Impl (Or (And p q) r) (And (Or p r) (Or q r))) (Impl (And (Or p r) (Or q r)) (Or (And p q) r))
