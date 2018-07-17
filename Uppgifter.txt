@@ -17,12 +17,12 @@ Kap 1
 Kap 2
 ----------------------------------
     1   .
-    2   . - resolve
-    3   ????
-    4   progress but questions
-    5   questions
+    2   .
+    3   .
+    4   .
+    5   .
     6   ????
-    7
+    7   .
     8
     9
     10
