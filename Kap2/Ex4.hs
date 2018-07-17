@@ -34,18 +34,22 @@ orIntroR q = Right q
 
 func:: (Either (p, q) r -> (Either p r, Either q r),
        (Either p r, Either q r) -> Either (p, q) r)
+func'::And (Or (And p q) r -> And (Or p r) (Or q r))
+           (And (Or p r) (Or q r) -> Or (And p q) r)
 func = (f, g)
-
-
---Får massa felmeddelanden - varför?
+func' = func
 
 f:: Either (p, q) r -> (Either p r, Either q r)
-f Left a = (Left (fst a), Left (snd a))
-f Right r = (Right r, Right r)
+f (Left a) = (Left (fst a), Left (snd a))
+f (Right r) = (Right r, Right r)
+
 
 g:: (Either p r, Either q r) -> Either (p, q) r
 g (Left p, Left q) = Left (p, q)
-g (Left p, Right r) = Right r 
-g (Right r, Left q) = Right r 
+g (Left p, Right r) = Right r
+g (Right r, Left q) = Right r
+g (Right r, Right r') = Right r
+
+--TODO: nr 2
 
 --And (Impl (Or (And p q) r) (And (Or p r) (Or q r))) (Impl (And (Or p r) (Or q r)) (Or (And p q) r))

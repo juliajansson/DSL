@@ -1,18 +1,19 @@
+{-# LANGUAGE EmptyCase #-}
 module Ex5 where
 data Empty
 type Not p = p -> Empty
+type Fals = Empty
+type Tru = Not Fals
 
-isEmpty:: Empty -> Empty
-isEMpty evE = evE
+idEmpty:: Empty -> Empty -- Tru
+idEmpty evE = evE
 
---TODO: Implement notIntro
-{-
 notIntro:: (p -> (q, q -> Empty)) -> (p -> Empty)
-notIntro f = g
+notIntro f x = y
+     where (a, b) = f x
+           y = b a 
 
-f:: p -> (q, q -> Empty)
-f p = 
--}
+
 
 contraHey:: Empty -> p
 contraHey evE = case evE of {}

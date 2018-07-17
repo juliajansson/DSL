@@ -114,14 +114,16 @@ andnotElim:: And (Not (Not p)) (Not (Not q)) -> And p q
 andnotElim = mapAnd notElim notElim
 
 
-notand2ornot:: Impl (NotAnd p q) (OrNot p q)
-notand2ornot = implIntro (notElim . notMap (andnotElim . no2an))
+notand2ornot:: Impl (NotAnd r s) (OrNot r s)
+notand2ornot = implIntro na2on
 
-na2on:: NotAnd p q -> OrNot p q
-na2on = notElim . notMap (andnotElim . no2an)
+na2on:: NotAnd r s -> OrNot r s
+na2on = notElim . exand
 
---TODO: förstå typer på hjälpfunktioner
---exand:: NotAnd p q -> 
-exand = notMap (andnotElim . no2an)
+exand:: Not (And r s) -> Not (Not (Or (Not r) (Not s)))
+exand = notMap ex
 
+ex:: Not (Or (Not r) (Not s)) -> And r s
+ex = andnotElim . no2an
 
+--Composed functions need to match on the intermediate type, if the functions are polymorphic, a more specific instance needs to be used
