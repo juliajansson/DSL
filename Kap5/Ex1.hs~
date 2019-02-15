@@ -1,0 +1,18 @@
+type Poly = [Integer]
+
+mulP:: Poly -> Poly -> Poly
+mulP [] p            = []
+mulP p []            = []
+mulP [a] p           = map (a*) p
+mulP p [b]           = map (b*) p
+mulP (0:as) p        = [0] ++ mulP as p
+mulP p (0:bs)        = [0] ++ mulP p bs
+mulP (a:as) q@(b:bs) = (mulP [a] q) `addP` (mulP (0:as) q)
+
+addP:: Poly -> Poly -> Poly
+addP [] [] = []
+addP [] l  = l
+addP l []  = l
+addP [a] (b:bs) = [a+b] ++ bs
+addP (a:as) [b] = [a+b] ++ as
+addP (a:as) (b:bs) = [a+b] ++ (addP as bs)

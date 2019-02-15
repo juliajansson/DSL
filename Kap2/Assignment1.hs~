@@ -1,0 +1,2 @@
+data SET where
+  Empty:: SET

@@ -1,0 +1,2 @@
+a::Natural -> Real
+a n = mod n 2 
